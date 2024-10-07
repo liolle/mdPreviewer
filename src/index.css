@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[contentEditable] {
+  outline: 0px solid transparent;
+  position: relative;
+}
