@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@edllx/md-parser':
+        specifier: ^2.0.5
+        version: 2.0.5
       solid-js:
         specifier: ^1.8.11
         version: 1.8.11
@@ -219,6 +222,9 @@ packages:
   '@babel/types@7.23.6':
     resolution: {integrity: sha512-+uarb83brBzPKN38NX1MkB6vb6+mwvR6amUulqAE7ccQw1pEl+bCia9TbdG1lsnFP7lZySvUn37CHyXQdfTwzg==}
     engines: {node: '>=6.9.0'}
+
+  '@edllx/md-parser@2.0.5':
+    resolution: {integrity: sha512-W9GsRmlc7hdvn6DrfaL0qDX20E9kYKPtJSF20lFVUYammiyFY0nh/eul09+ZqcLcZ3r2saXy5ntQ/zwQCVVnIQ==}
 
   '@esbuild/aix-ppc64@0.19.11':
     resolution: {integrity: sha512-FnzU0LyE3ySQk7UntJO4+qIiQgI7KoODnZg5xzXIrFJlKd2P2gwHsHY4927xj9y5PJmJSzULiUCWmv7iWnNa7g==}
@@ -1428,6 +1434,8 @@ snapshots:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+
+  '@edllx/md-parser@2.0.5': {}
 
   '@esbuild/aix-ppc64@0.19.11':
     optional: true

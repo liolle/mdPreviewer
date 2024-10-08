@@ -4,5 +4,7 @@
 
 [contentEditable] {
   outline: 0px solid transparent;
-  position: relative;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
