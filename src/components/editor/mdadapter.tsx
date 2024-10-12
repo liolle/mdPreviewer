@@ -12,11 +12,23 @@ import {
   Decoration,
   InlineCode,
   CodeToken,
+  CheckBoxToken,
 } from "@edllx/md-parser";
 import { JSXElement } from "solid-js";
 import CodeBlock from "../codeblock";
 
 export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
+  private elementStyles = {
+    h1: "text-4xl font-bold mt-4 mb-2 leading-tight",
+    h2: "text-3xl font-bold mt-4 mb-2 leading-tight",
+    h3: "text-2xl font-bold mt-3 mb-1 leading-tight",
+    h4: "text-xl font-bold mt-2 mb-1 leading-snug",
+    h5: "text-lg font-bold mt-1 mb-1 leading-normal",
+    h6: "text-base font-bold mt-1 mb-1 leading-normal",
+    ul: "ml-6 ",
+    li: " list-disc",
+    img: " w-52 rounded-md shadow-md object-contain ",
+  };
   compile(token: Token) {
     return this.#recursiveCompile(token);
   }
@@ -89,23 +101,23 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     };
     switch (token.type) {
       case TOKEN.TOKEN_TYPE.H1:
-        element = <h1>{nestedElements()}</h1>;
+        element = <h1 class={this.elementStyles.h1}>{nestedElements()}</h1>;
         break;
       case TOKEN.TOKEN_TYPE.H2:
-        element = <h2>{nestedElements()}</h2>;
+        element = <h2 class={this.elementStyles.h2}>{nestedElements()}</h2>;
         break;
       case TOKEN.TOKEN_TYPE.H3:
-        element = <h3>{nestedElements()}</h3>;
+        element = <h3 class={this.elementStyles.h3}>{nestedElements()}</h3>;
         break;
       case TOKEN.TOKEN_TYPE.H4:
-        element = <h4>{nestedElements()}</h4>;
+        element = <h4 class={this.elementStyles.h4}>{nestedElements()}</h4>;
         break;
       case TOKEN.TOKEN_TYPE.H5:
-        element = <h5>{nestedElements()}</h5>;
+        element = <h5 class={this.elementStyles.h5}>{nestedElements()}</h5>;
         break;
 
       default:
-        element = <h6>{nestedElements()}</h6>;
+        element = <h6 class={this.elementStyles.h6}>{nestedElements()}</h6>;
         break;
     }
 
@@ -121,7 +133,11 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
       case LINK_TOKEN_TYPE.IMAGE:
         return (
           <a href={`${token.body}`} rel="ugc nofollow noopener" target="_blank">
-            <img src={`${token.body}`} alt={`${token.name}`} />
+            <img
+              class={this.elementStyles.img}
+              src={`${token.body}`}
+              alt={`${token.name}`}
+            />
           </a>
         );
 
@@ -138,12 +154,25 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     switch (token.type) {
       case TOKEN.TOKEN_TYPE.UL:
         return (
-          <ul>{token.children.map((el) => this.#recursiveCompile(el))}</ul>
+          <ul class={this.elementStyles.ul}>
+            {token.children.map((el) => this.#recursiveCompile(el))}
+          </ul>
         );
+      case TOKEN.TOKEN_TYPE.CHECK_BOX:
+        if (token instanceof CheckBoxToken) {
+          return (
+            <li class={`${this.elementStyles.ul} flex gap-2 items-center  `}>
+              <input type="checkbox" name="" id="" checked={token.checked} />
+              {token.children.map((el) => this.#recursiveCompile(el))}
+            </li>
+          );
+        }
 
       default:
         return (
-          <li>{token.children.map((el) => this.#recursiveCompile(el))}</li>
+          <li class={this.elementStyles.li}>
+            {token.children.map((el) => this.#recursiveCompile(el))}
+          </li>
         );
     }
   }
@@ -164,7 +193,7 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
         element = <s>{nestedElements()}</s>;
         break;
       case TOKEN.TOKEN_TYPE.HIGHLIGHT:
-        element = <span class=" bg-yellow-300">{nestedElements()}</span>;
+        element = <span class=" bg-yellow-300 ">{nestedElements()}</span>;
         break;
       case TOKEN.TOKEN_TYPE.INLINE_CODE:
         element = <code>{nestedElements()}</code>;
@@ -183,6 +212,8 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
   }
 
   #codeBlock(token: CodeToken) {
+    console.log(token);
+
     return <CodeBlock body={token.body} language={token.language} />;
   }
 }

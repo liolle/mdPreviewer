@@ -8,3 +8,7 @@
   white-space: normal;
   overflow-wrap: break-word;
 }
+
+br {
+  line-height: 12px;
+}
