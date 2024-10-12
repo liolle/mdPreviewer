@@ -339,10 +339,11 @@ function resolveLang(language: string) {
 }
 
 function getInnerHtml(body: string, language: string) {
+  const resolved_lan = resolveLang(language);
   return Prism.highlight(
     body,
-    Prism.languages.javascript,
-    resolveLang(language)
+    Prism.languages[resolved_lan] || Prism.languages.javascript,
+    resolved_lan
   );
 }
 

@@ -28,6 +28,7 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     ul: "ml-6 ",
     li: " list-disc",
     img: " w-52 rounded-md shadow-md object-contain ",
+    a: "text-blue-600 hover:text-blue-800 underline focus:outline-none focus:ring-2 focus:ring-blue-400",
   };
   compile(token: Token) {
     return this.#recursiveCompile(token);
@@ -143,7 +144,12 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
 
       default:
         return (
-          <a href={`${token.body}`} rel="ugc nofollow noopener" target="_blank">
+          <a
+            class={`${this.elementStyles.a}`}
+            href={`${token.body}`}
+            rel="ugc nofollow noopener"
+            target="_blank"
+          >
             {token.name}
           </a>
         );
@@ -212,8 +218,6 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
   }
 
   #codeBlock(token: CodeToken) {
-    console.log(token);
-
     return <CodeBlock body={token.body} language={token.language} />;
   }
 }
