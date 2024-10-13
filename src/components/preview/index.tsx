@@ -1,18 +1,49 @@
 import { Factory, tokenize } from "@edllx/md-parser";
-import { JSXElement, type Component } from "solid-js";
-import { editorContent } from "../editor";
-import { TokenToTsxAdapter } from "../editor/mdadapter";
+import {
+  createEffect,
+  createSignal,
+  JSXElement,
+  onMount,
+  type Component,
+} from "solid-js";
+import { editorContent, scrollRatio } from "../editor";
+import { TokenToTsxAdapter } from "./mdadapter";
+const [scroll_value, set_scroll_value] = createSignal(0);
 
 const Previewer: Component = () => {
   const compiler = new TokenToTsxAdapter();
+  let previewer: HTMLDivElement | undefined;
 
   function compile(source: string): JSXElement {
     return compiler.compile(Factory.ROOT(tokenize(source)));
   }
 
+  function onScroll() {
+    if (previewer) {
+      set_scroll_value(previewer.scrollTop);
+    }
+  }
+
+  onMount(() => {
+    if (previewer) {
+      previewer.scrollTop = scroll_value();
+    }
+  });
+
+  createEffect(() => {
+    if (previewer) {
+      // After the content renders, restore the scroll position
+      previewer.scrollTop = scroll_value();
+    }
+  });
+
   return (
-    <div class=" h-full w-full bg-slate-100  p-2 overflow-hidden  ">
-      <div class=" h-full w-full p-2 overflow-y-scroll border border-neutral-800 border-solid rounded ">
+    <div class="flex flex-col h-full w-full bg-vsDark-background text-vsDark-operator  overflow-y-scroll flex-1 ">
+      <div
+        ref={previewer}
+        onScroll={onScroll}
+        class=" h-full w-full p-2 overflow-y-auto  pb-52 text-[20px] font-mono"
+      >
         {compile(editorContent())}
       </div>
     </div>

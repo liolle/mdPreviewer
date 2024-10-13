@@ -313,7 +313,6 @@ enum SUPPORTED_LANG {
 
 function resolveLang(language: string) {
   const lan = language.trim();
-  console.log(language);
 
   switch (true) {
     case /jascript|js/gi.test(lan):
@@ -349,8 +348,8 @@ function getInnerHtml(body: string, language: string) {
 
 const CodeBlock: Component<CodeBlockType> = (props: CodeBlockType) => {
   const [copied, setCopied] = createSignal(false);
-  console.log(props.body);
-  console.log(props.language);
+
+  const lang = resolveLang(props.language);
 
   async function copy() {
     if (copied()) {
@@ -369,26 +368,24 @@ const CodeBlock: Component<CodeBlockType> = (props: CodeBlockType) => {
   }
 
   return (
-    <div class=" relative bg-neutral-800 rounded-md py-3 px-4 flex flex-col gap-2 max-w-[638px]">
+    <div class=" relative bg-neutral-800 rounded-md p-4 flex flex-col gap-2 max-w-[638px]">
       <Show
         when={copied()}
         fallback={
           <button
             onclick={copy}
-            class=" absolute top-2 right-3 text-neutral-50 cursor-pointer rounded-md p-1 h-6 w-6 bg-slate-600 flex justify-center items-center hover:bg-neutral-50 hover:text-neutral-600"
+            class=" absolute top-2 right-3 text-neutral-50 cursor-pointer rounded-md px-2 py-1  bg-slate-600 flex justify-center items-center hover:bg-neutral-50 hover:text-neutral-600"
           >
-            <span>o</span>
+            <span>{lang}</span>
           </button>
         }
       >
-        <div class="absolute top-2 right-3 text-neutral-50 select-none">
-          Copied
+        <div class="absolute top-2 right-3 px-2 py-1 flex justify-center items-center  text-neutral-50 select-none">
+          <span>Copied</span>
         </div>
       </Show>
-      <div class="text-neutral-50 font-thin text-md">
-        <span>{resolveLang(props.language)}&#8203;</span>
-      </div>
-      <div class="  w-[80%] text-neutral-50 ">
+
+      <div class="  w-[70%] text-neutral-50 ">
         <pre>
           <code
             class=""

@@ -1,41 +1,123 @@
-import { createSignal, type Component } from "solid-js";
+import { editor } from "monaco-editor";
+import {
+  createSignal,
+  type Component,
+  createEffect,
+  Show,
+  onMount,
+  onCleanup,
+} from "solid-js";
 
-export const [editorContent, setEditorContent] = createSignal("");
+const DEFAULT_TEXT = `
+# Title Header (H1 header)
+
+# simple
+
+This is some placeholder text to show examples of Markdown formatting. We have
+[a full article template](https://github.com/do-community/do-article-templates)
+you can use when writing a DigitalOcean article. Please refer to our style and
+formatting guidelines for more detailed explanations: <https://do.co/style>
+
+## Prerequisites (H2 header)
+
+Before you begin this guide you'll need the following:
+
+- Familiarity with [Markdown](https://daringfireball.net/projects/markdown/)
+
+## Step 1 — Basic Markdown
+
+This is _italics_, this is **bold**, this is **underline**, and this is
+~~strikethrough~~.
+
+- This is a list item.
+- This list is unordered.
+
+Here's how to include an image with alt text and a title:
+
+![Alt text for screen readers](https://assets.digitalocean.com/logos/DO_Logo_horizontal_blue.png 'DigitalOcean Logo')
+
+_We also support some extra syntax for setting the width, height and alignment
+of images. You can provide pixels (${"`"}200${"`"}/${"`"}200px${"`"}), or a percentage (${"`"}50%${"`"}), for
+the width/height. The alignment can be either ${"`"}left${"`"} or ${"`"}right${"`"}, with images
+being centered by default. These settings are all optional._
+
+![](https://assets.digitalocean.com/public/mascot.png)
+
+## Step 2 — Code
+
+This is ${"`"}inline code${"`"}. This is a <^>variable<^>. This is an
+${"`"}in-line code <^>variable<^>${"`"}. You can also have
+[${"`"}code${"`"} in links](https://www.digitalocean.com).
+
+Here's a configuration file with a label:
+
+${"```"}nginx
+[label /etc/nginx/sites-available/default]
+server {
+    listen 80 <^>default_server<^>;
+    . . .
+}
+${"```"}
+
+Examples can have line numbers, and every code block has a 'Copy' button to copy
+just the code:
+
+${"```"}js
+const test = 'hello';
+const other = 'world';
+console.log(test, other);
+
+${"```"}
+`;
+
+export const [editorContent, setEditorContent] = createSignal(DEFAULT_TEXT);
+
+export const [scrollRatio, setScrollRatio] = createSignal(0);
 
 const Editor: Component = () => {
-  function removeFormatting(ev: ClipboardEvent) {
-    ev.preventDefault();
-    const data = ev.clipboardData;
-    if (!data) return;
-    const text = data.getData("text");
-    document.execCommand("insertText", false, text);
-  }
+  let editor_ref: HTMLDivElement | undefined;
 
-  function handleInput(ev: InputEvent) {
-    const target = ev.target as HTMLElement;
-    if (!target) return;
-    console.log(target.innerText);
+  onMount(() => {
+    if (!editor_ref) {
+      return;
+    }
 
-    setEditorContent(target.innerText);
-  }
+    const ed = editor.create(editor_ref, {
+      value: editorContent(),
+      language: "markdown",
+      wordBasedSuggestions: "off",
+      autoIndent: "advanced",
+      theme: "vs-dark",
+      wordWrap: "on",
+      renderWhitespace: "all",
+      renderLineHighlight: "gutter",
+      smoothScrolling: true,
+      // roundedSelection: false,
+      accessibilityPageSize: 1000,
+      fontSize: 20,
+    });
 
-  return (
-    <div class=" h-full w-full bg-slate-100  p-2 overflow-hidden ">
-      <div
-        contentEditable
-        role="textbox"
-        aria-multiline
-        onInput={handleInput}
-        onpaste={removeFormatting}
-        spellcheck={false}
-        class=" editor h-full w-full border border-neutral-800 border-solid rounded overflow-y-scroll p-2 "
-      >
-        <div>
-          <br />
-        </div>
-      </div>
-    </div>
-  );
+    ed.onDidChangeModelContent(() => {
+      const markdownContent = ed.getValue();
+      setEditorContent(markdownContent);
+    });
+
+    ed.onDidScrollChange(() => {
+      const editorScrollTop = ed.getScrollTop();
+      const editorScrollHeight = ed.getScrollHeight();
+      setScrollRatio(Math.ceil(editorScrollTop / editorScrollHeight));
+    });
+
+    window.addEventListener("resize", () => {
+      ed.layout();
+    });
+
+    onCleanup(() => {
+      ed.dispose();
+    });
+  });
+
+  return <div ref={editor_ref} class="flex-1"></div>;
 };
 
 export default Editor;
