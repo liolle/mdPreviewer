@@ -28,7 +28,7 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     ul: "ml-6 ",
     li: " list-disc",
     img: " w-52 rounded-md shadow-md object-contain ",
-    a: "text-blue-600 hover:text-blue-800 underline focus:outline-none focus:ring-2 focus:ring-blue-400",
+    a: "text-blue-400 hover:text-blue-600 underline focus:outline-none focus:ring-2 focus:ring-blue-400",
   };
   compile(token: Token) {
     return this.#recursiveCompile(token);
@@ -133,9 +133,13 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     switch (token.kind) {
       case LINK_TOKEN_TYPE.IMAGE:
         return (
-          <a href={`${token.body}`} rel="ugc nofollow noopener" target="_blank">
+          <a
+            href={`${token.body} w-fit`}
+            rel="ugc nofollow noopener"
+            target="_blank"
+          >
             <img
-              class={this.elementStyles.img}
+              class={`${this.elementStyles.img} `}
               src={`${token.body}`}
               alt={`${token.name}`}
             />
@@ -145,7 +149,7 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
       default:
         return (
           <a
-            class={`${this.elementStyles.a}`}
+            class={`${this.elementStyles.a} `}
             href={`${token.body}`}
             rel="ugc nofollow noopener"
             target="_blank"
