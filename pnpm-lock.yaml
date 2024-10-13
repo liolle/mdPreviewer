@@ -9,8 +9,11 @@ importers:
   .:
     dependencies:
       '@edllx/md-parser':
-        specifier: ^2.0.7
-        version: 2.0.7
+        specifier: ^2.0.8
+        version: 2.0.8
+      monaco-editor:
+        specifier: 0.52.0
+        version: 0.52.0
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
@@ -232,8 +235,8 @@ packages:
     resolution: {integrity: sha512-+uarb83brBzPKN38NX1MkB6vb6+mwvR6amUulqAE7ccQw1pEl+bCia9TbdG1lsnFP7lZySvUn37CHyXQdfTwzg==}
     engines: {node: '>=6.9.0'}
 
-  '@edllx/md-parser@2.0.7':
-    resolution: {integrity: sha512-/UyzIe9fFp7qtFIilk2DzkdvmNy62wYeFGHukyNqX5d+Xz9BtkRa4FYzQ6iVXlIzH8zJrNDHaiz2Ft6cN0GIdA==}
+  '@edllx/md-parser@2.0.8':
+    resolution: {integrity: sha512-z3odR1W5eJEwGIJyBuv+O51tbn8BDaWnkzLZikVVkIiFrka2boL/Hinact98B4YK2asM8sXKNuqkvPdaC6FKgA==}
 
   '@esbuild/aix-ppc64@0.19.11':
     resolution: {integrity: sha512-FnzU0LyE3ySQk7UntJO4+qIiQgI7KoODnZg5xzXIrFJlKd2P2gwHsHY4927xj9y5PJmJSzULiUCWmv7iWnNa7g==}
@@ -912,6 +915,9 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
+  monaco-editor@0.52.0:
+    resolution: {integrity: sha512-OeWhNpABLCeTqubfqLMXGsqf6OmPU6pHM85kF3dhy6kq5hnhuVS1p3VrEW/XhWHc71P2tHyS5JFySD8mgs1crw==}
+
   ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
@@ -1469,7 +1475,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@edllx/md-parser@2.0.7': {}
+  '@edllx/md-parser@2.0.8': {}
 
   '@esbuild/aix-ppc64@0.19.11':
     optional: true
@@ -2070,6 +2076,8 @@ snapshots:
       brace-expansion: 2.0.1
 
   minipass@7.1.2: {}
+
+  monaco-editor@0.52.0: {}
 
   ms@2.1.2: {}
 
