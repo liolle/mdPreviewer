@@ -134,7 +134,8 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
       case LINK_TOKEN_TYPE.IMAGE:
         return (
           <a
-            href={`${token.body} w-fit`}
+            class="w-fit"
+            href={`${token.body} `}
             rel="ugc nofollow noopener"
             target="_blank"
           >

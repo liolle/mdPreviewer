@@ -49,16 +49,6 @@ This is ${"`"}inline code${"`"}. This is a <^>variable<^>. This is an
 ${"`"}in-line code <^>variable<^>${"`"}. You can also have
 [${"`"}code${"`"} in links](https://www.digitalocean.com).
 
-Here's a configuration file with a label:
-
-${"```"}nginx
-[label /etc/nginx/sites-available/default]
-server {
-    listen 80 <^>default_server<^>;
-    . . .
-}
-${"```"}
-
 Examples can have line numbers, and every code block has a 'Copy' button to copy
 just the code:
 
@@ -108,16 +98,27 @@ const Editor: Component = () => {
       setScrollRatio(Math.ceil(editorScrollTop / editorScrollHeight));
     });
 
-    window.addEventListener("resize", () => {
+    const updateEditorLayout = () => {
       ed.layout();
-    });
+    };
+
+    let lastDevicePixelRatio = window.devicePixelRatio;
+    const checkZoom = setInterval(() => {
+      if (window.devicePixelRatio !== lastDevicePixelRatio) {
+        lastDevicePixelRatio = window.devicePixelRatio;
+        updateEditorLayout();
+      }
+    }, 100);
+
+    window.addEventListener("resize", updateEditorLayout);
 
     onCleanup(() => {
       ed.dispose();
+      clearInterval(checkZoom);
     });
   });
 
-  return <div ref={editor_ref} class="flex-1"></div>;
+  return <div ref={editor_ref} class="flex-1 max-w-[50%]"></div>;
 };
 
 export default Editor;
