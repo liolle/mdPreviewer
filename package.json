@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@edllx/md-parser": "^2.0.8",
+    "lucide-solid": "^0.452.0",
     "monaco-editor": "0.52.0",
     "prismjs": "^1.29.0",
     "solid-js": "^1.8.11"

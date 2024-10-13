@@ -6,8 +6,8 @@ import {
   onMount,
   type Component,
 } from "solid-js";
-import { editorContent, scrollRatio } from "../editor";
 import { TokenToTsxAdapter } from "./mdadapter";
+import { editorContent } from "../../App";
 const [scroll_value, set_scroll_value] = createSignal(0);
 
 const Previewer: Component = () => {

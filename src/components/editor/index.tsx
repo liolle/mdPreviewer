@@ -7,8 +7,9 @@ import {
   onMount,
   onCleanup,
 } from "solid-js";
+import { editorContent, setEditorContent } from "../../App";
 
-const DEFAULT_TEXT = `
+export const DEFAULT_TEXT = `
 # Title Header (H1 header)
 
 # simple
@@ -59,8 +60,6 @@ console.log(test, other);
 
 ${"```"}
 `;
-
-export const [editorContent, setEditorContent] = createSignal(DEFAULT_TEXT);
 
 export const [scrollRatio, setScrollRatio] = createSignal(0);
 
