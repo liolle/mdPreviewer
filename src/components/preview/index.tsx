@@ -38,7 +38,7 @@ const Previewer: Component = () => {
   });
 
   return (
-    <div class="flex flex-col h-full w-full bg-vsDark-background text-vsDark-operator  overflow-y-scroll flex-1 ">
+    <div class="flex flex-col h-full w-full bg-vsDark-background text-vsDark-operator   flex-1 ">
       <div
         ref={previewer}
         onScroll={onScroll}
