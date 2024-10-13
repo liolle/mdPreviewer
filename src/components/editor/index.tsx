@@ -82,9 +82,7 @@ const Editor: Component = () => {
       renderWhitespace: "all",
       renderLineHighlight: "gutter",
       smoothScrolling: true,
-      // roundedSelection: false,
       accessibilityPageSize: 1000,
-      fontSize: 20,
     });
 
     ed.onDidChangeModelContent(() => {
