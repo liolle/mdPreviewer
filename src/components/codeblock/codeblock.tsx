@@ -111,7 +111,7 @@ function resolveLang(language: string) {
   const lan = language.trim();
 
   switch (true) {
-    case /c\++/gi.test(lan):
+    case /c\++|cp+/gi.test(lan):
       return SUPPORTED_LANG.CPP;
     case /c#|csharp/gi.test(lan):
       return SUPPORTED_LANG.CSHARP;
@@ -218,7 +218,7 @@ const CodeBlock: Component<CodeBlockType> = (props: CodeBlockType) => {
   }
 
   return (
-    <div class=" relative bg-neutral-800 rounded-md p-4 flex flex-col gap-2 max-w-[638px] min-h-12">
+    <div class=" relative bg-neutral-800 rounded-md p-4 pt-10 flex flex-col gap-2 max-w-[702px] min-h-12">
       <Show
         when={copied()}
         fallback={
@@ -235,9 +235,9 @@ const CodeBlock: Component<CodeBlockType> = (props: CodeBlockType) => {
         </div>
       </Show>
 
-      <div class="  w-[70%] text-neutral-50 ">
-        <pre>
-          <code class="" innerHTML={highlighted_code()}></code>
+      <div class="w-full text-neutral-50  ">
+        <pre class=" overflow-x-scroll">
+          <code class=" " innerHTML={highlighted_code()}></code>
         </pre>
       </div>
     </div>
