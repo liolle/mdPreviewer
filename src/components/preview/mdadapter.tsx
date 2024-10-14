@@ -15,7 +15,7 @@ import {
   CheckBoxToken,
 } from "@edllx/md-parser";
 import { JSXElement } from "solid-js";
-import CodeBlock from "../codeblock";
+import CodeBlock from "../codeblock/codeblock";
 
 export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
   private elementStyles = {
