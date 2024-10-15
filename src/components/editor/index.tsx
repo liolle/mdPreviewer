@@ -8,6 +8,7 @@ import {
   onCleanup,
 } from "solid-js";
 import { editorContent, setEditorContent } from "../../App";
+import { debounce } from "../../utils";
 
 export const DEFAULT_TEXT = `
 # Title Header (H1 header)
@@ -97,6 +98,11 @@ const Editor: Component = () => {
 
     const updateEditorLayout = () => {
       ed.layout();
+      ed.layout({ width: 0, height: 0 });
+      window.requestAnimationFrame(() => {
+        const rect = editor_ref.getBoundingClientRect();
+        ed.layout({ width: rect.width, height: rect.height });
+      });
     };
 
     let lastDevicePixelRatio = window.devicePixelRatio;
@@ -107,7 +113,11 @@ const Editor: Component = () => {
       }
     }, 100);
 
-    window.addEventListener("resize", updateEditorLayout);
+    const debounced = debounce(() => {
+      updateEditorLayout();
+    }, 100);
+
+    window.addEventListener("resize", debounced);
 
     onCleanup(() => {
       ed.dispose();

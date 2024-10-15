@@ -14,7 +14,11 @@ const App: Component = () => {
           <span class=" h-8 w-8">
             <img class=" object-contain h-full w-full" src={logo} alt="" />
           </span>
-          <a href="https://github.com/liolle/mdPreviewer">
+          <a
+            href="https://github.com/liolle/mdPreviewer"
+            rel="ugc nofollow noopener"
+            target="_blank"
+          >
             <img class="  object-contain max-h-8 " src={github_logo} alt="" />
           </a>
         </div>
