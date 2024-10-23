@@ -42,7 +42,7 @@ const Previewer: Component = () => {
       <div
         ref={previewer}
         onScroll={onScroll}
-        class=" h-full w-full p-2 overflow-y-auto  pb-52 laptop:text-[16px] desktop:text-[18px] font-mono"
+        class=" scrollbar-hidden  h-full w-full p-2 overflow-y-auto  pb-52 laptop:text-[16px] desktop:text-[18px] font-mono"
       >
         {compile(editorContent())}
       </div>

@@ -11,7 +11,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
     "@types/prismjs": "^1.26.4",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
@@ -24,7 +23,6 @@
   "dependencies": {
     "@edllx/md-parser": "^2.0.8",
     "highlight.js": "^11.10.0",
-    "lucide-solid": "^0.452.0",
     "monaco-editor": "0.52.0",
     "solid-js": "^1.9.2"
   }

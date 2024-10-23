@@ -236,7 +236,7 @@ const CodeBlock: Component<CodeBlockType> = (props: CodeBlockType) => {
       </Show>
 
       <div class="w-full text-neutral-50  ">
-        <pre class=" overflow-x-scroll">
+        <pre class=" scrollbar-hidden overflow-x-scroll">
           <code class=" " innerHTML={highlighted_code()}></code>
         </pre>
       </div>
