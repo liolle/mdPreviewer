@@ -29,6 +29,9 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     li: " list-disc",
     img: " w-52 rounded-md shadow-md object-contain ",
     a: "text-blue-400 hover:text-blue-600 underline focus:outline-none focus:ring-2 focus:ring-blue-400",
+    inlineCode: "text-[#d7ba7d] bg-[#353535] py-[1px] px-[2px]  rounded",
+    Highlight:
+      "bg-yellow-300 text-vsDark-background py-[1px] px-[2px]  rounded-sm",
   };
   compile(token: Token) {
     return this.#recursiveCompile(token);
@@ -146,6 +149,25 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
             />
           </a>
         );
+      case LINK_TOKEN_TYPE.NESTED_IMG:
+        let child = token.children[0];
+
+        return (
+          <a
+            class="w-fit"
+            href={`${token.body} `}
+            rel="ugc nofollow noopener"
+            target="_blank"
+          >
+            {child instanceof LinkToken && (
+              <img
+                class={`${this.elementStyles.img} `}
+                src={`${child.body}`}
+                alt={`${child.name}`}
+              />
+            )}
+          </a>
+        );
 
       default:
         return (
@@ -204,7 +226,11 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
         element = <s>{nestedElements()}</s>;
         break;
       case TOKEN.TOKEN_TYPE.HIGHLIGHT:
-        element = <span class=" bg-yellow-300 ">{nestedElements()}</span>;
+        element = (
+          <span class={`${this.elementStyles.Highlight}`}>
+            {nestedElements()}
+          </span>
+        );
         break;
       case TOKEN.TOKEN_TYPE.INLINE_CODE:
         element = <code>{nestedElements()}</code>;
@@ -219,7 +245,7 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
   }
 
   #inlineCode(token: InlineCode) {
-    return <code>{token.body}</code>;
+    return <code class={`${this.elementStyles.inlineCode}`}>{token.body}</code>;
   }
 
   #codeBlock(token: CodeToken) {

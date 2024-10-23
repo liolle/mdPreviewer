@@ -11,55 +11,86 @@ import { editorContent, setEditorContent } from "../../App";
 import { debounce } from "../../utils";
 
 export const DEFAULT_TEXT = `
-# Title Header (H1 header)
 
-# simple
+# h1 Heading 8-)
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
 
-This is some placeholder text to show examples of Markdown formatting. We have
-[a full article template](https://github.com/do-community/do-article-templates)
-you can use when writing a DigitalOcean article. Please refer to our style and
-formatting guidelines for more detailed explanations: <https://do.co/style>
+## Emphasis
 
-## Prerequisites (H2 header)
+**This is bold text**
 
-Before you begin this guide you'll need the following:
+_This is italic text_
 
-- Familiarity with [Markdown](https://daringfireball.net/projects/markdown/)
+==Marked text==
 
-## Step 1 — Basic Markdown
+~~Strikethrough~~
 
-This is _italics_, this is **bold**, this is **underline**, and this is
-~~strikethrough~~.
+## Lists
 
-- This is a list item.
-- This list is unordered.
+Unordered
 
-Here's how to include an image with alt text and a title:
+- Create a list by starting a line with ${"`"}-${"`"}
+- Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    - Ac tristique libero volutpat at
+    - Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
+- Very easy!
 
-![Alt text for screen readers](https://assets.digitalocean.com/logos/DO_Logo_horizontal_blue.png 'DigitalOcean Logo')
 
-_We also support some extra syntax for setting the width, height and alignment
-of images. You can provide pixels (${"`"}200${"`"}/${"`"}200px${"`"}), or a percentage (${"`"}50%${"`"}), for
-the width/height. The alignment can be either ${"`"}left${"`"} or ${"`"}right${"`"}, with images
-being centered by default. These settings are all optional._
+## Code
 
-![](https://assets.digitalocean.com/public/mascot.png)
+${"`"}Inline code${"`"}
 
-## Step 2 — Code
-
-This is ${"`"}inline code${"`"}. This is a <^>variable<^>. This is an
-${"`"}in-line code <^>variable<^>${"`"}. You can also have
-[${"`"}code${"`"} in links](https://www.digitalocean.com).
-
-Examples can have line numbers, and every code block has a 'Copy' button to copy
-just the code:
-
-${"```"}js
-const test = 'hello';
-const other = 'world';
-console.log(test, other);
+Block code "fences"
 
 ${"```"}
+  Sample text here...
+${"```"}
+
+Syntax highlighting
+
+${"```"} js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+${"```"}
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+
 `;
 
 export const [scrollRatio, setScrollRatio] = createSignal(0);
