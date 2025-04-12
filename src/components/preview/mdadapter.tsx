@@ -25,8 +25,9 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
     h4: "text-xl font-bold mt-2 mb-1 leading-snug",
     h5: "text-lg font-bold mt-1 mb-1 leading-normal",
     h6: "text-base font-bold mt-1 mb-1 leading-normal",
-    ul: "ml-6 ",
-    li: " list-disc",
+    ul: "ml-8 [list-style-type:var(--list-style-ul)] ",
+    ol: "pl-8 [list-style-type:var(--list-style-ol)]",
+    li: " ",
     img: " w-52 rounded-md shadow-md object-contain ",
     a: "text-blue-400 hover:text-blue-600 underline focus:outline-none focus:ring-2 focus:ring-blue-400",
     inlineCode: "text-[#d7ba7d] bg-[#353535] py-[1px] px-[2px]  rounded",
@@ -184,7 +185,14 @@ export class TokenToTsxAdapter implements TokenCompiler<JSXElement> {
   }
 
   #lists(token: ListToken): JSXElement {
+    let x = LinkToken
     switch (token.type) {
+      case TOKEN.TOKEN_TYPE.OL:
+        return (
+          <ol class={this.elementStyles.ol}>
+            {token.children.map((el) => this.#recursiveCompile(el))}
+          </ol>
+        );
       case TOKEN.TOKEN_TYPE.UL:
         return (
           <ul class={this.elementStyles.ul}>

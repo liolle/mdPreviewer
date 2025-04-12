@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@edllx/md-parser':
-        specifier: ^2.0.11
-        version: 2.0.11
+        specifier: ^2.1.1
+        version: 2.1.1
       highlight.js:
         specifier: ^11.10.0
         version: 11.10.0
@@ -147,8 +147,8 @@ packages:
     resolution: {integrity: sha512-JWtuCu8VQsMladxVz/P4HzHUGCAwpuqacmowgXFs5XjxIgKuNjnLokQzuVjlTvIzODaDmpjT3oxcC48vyk9EWg==}
     engines: {node: '>=6.9.0'}
 
-  '@edllx/md-parser@2.0.11':
-    resolution: {integrity: sha512-Fa96TTwZLUaB+d04CDtuEjIhqeiGz9aNfOCxRtt/fBcayPGRpDqwbAc7a+zQ1p31MrPvx5CCY6FI4iWlrJ5kNQ==}
+  '@edllx/md-parser@2.1.1':
+    resolution: {integrity: sha512-Rw2SCHuuu8MOnIpZwiFWfMpBH6ys3AgV7I4Xeh+9G5Ezj5lxki2jDKt6W1B6wuIrLm3XDbwuQ8rNsNdkIKn1jg==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -1318,7 +1318,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.7
       to-fast-properties: 2.0.0
 
-  '@edllx/md-parser@2.0.11': {}
+  '@edllx/md-parser@2.1.1': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true

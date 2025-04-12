@@ -21,7 +21,7 @@
     "vite-plugin-solid": "^2.10.2"
   },
   "dependencies": {
-    "@edllx/md-parser": "^2.0.11",
+    "@edllx/md-parser": "^2.1.1",
     "highlight.js": "^11.10.0",
     "monaco-editor": "0.52.0",
     "solid-js": "^1.9.2"

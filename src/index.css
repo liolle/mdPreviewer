@@ -9,6 +9,11 @@
   overflow-wrap: break-word;
 }
 
+:root {
+  --list-style-ul: disc;       
+  --list-style-ol: decimal;   
+}
+
 br {
   line-height: 12px;
 }

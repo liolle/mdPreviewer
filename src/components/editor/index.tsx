@@ -41,6 +41,15 @@ Unordered
     - Nulla volutpat aliquam velit
 - Very easy!
 
+##### Ordered
+1. first ol
+22. second ol
+44. test
+  - nested ul
+  1. first nested ol
+  2. second nested ol
+3. third ol
+  1. other nested ol
 
 ## Code
 
